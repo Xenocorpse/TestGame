@@ -1,9 +1,22 @@
 package main;
 
-import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.glfw.GLFW.GLFW_RESIZABLE;
+import static org.lwjgl.glfw.GLFW.glfwCreateWindow;
+import static org.lwjgl.glfw.GLFW.glfwGetPrimaryMonitor;
+import static org.lwjgl.glfw.GLFW.glfwGetVideoMode;
+import static org.lwjgl.glfw.GLFW.glfwInit;
+import static org.lwjgl.glfw.GLFW.glfwMakeContextCurrent;
+import static org.lwjgl.glfw.GLFW.glfwPollEvents;
+import static org.lwjgl.glfw.GLFW.glfwSetWindowPos;
+import static org.lwjgl.glfw.GLFW.glfwShowWindow;
+import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
+import static org.lwjgl.glfw.GLFW.glfwWindowHint;
+import static org.lwjgl.glfw.GLFW.glfwWindowShouldClose;
+import static org.lwjgl.opengl.GL11.GL_TRUE;
+import static org.lwjgl.system.MemoryUtil.NULL;
+
 import org.lwjgl.glfw.GLFWVidMode;
+import org.lwjgl.opengl.GL;
 
 public class Main implements Runnable{
 	
@@ -27,6 +40,7 @@ public class Main implements Runnable{
 	}
 	
 	public void init() {
+		
 		if (GL_TRUE == 1) {
 			glTrue = true;
 		}
@@ -64,10 +78,14 @@ public class Main implements Runnable{
 		
 		// Finally shows the created window
 		glfwShowWindow(window);	
+		
+		glfwMakeContextCurrent(window);
 	}
 	
 	public void update() {
 		glfwPollEvents();
+		
+		GL.createCapabilities();
 	}
 	
 	public void render() {
@@ -76,6 +94,7 @@ public class Main implements Runnable{
 
 	@Override
 	public void run() {
+		
 		init();
 		
 		while(running) {
